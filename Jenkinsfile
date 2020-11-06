@@ -48,11 +48,7 @@ pipeline {
       steps {
         input 'are you sure?'
         milestone(1)
-        withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
-          script {
-            sh 'pwd'
-          }
-        }
+        
       }
     }
   }
