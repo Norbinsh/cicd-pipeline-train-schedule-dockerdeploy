@@ -48,7 +48,11 @@ pipeline {
       steps {
         input 'are you sure?'
         milestone(1)
-        
+         kubernetesDeploy(
+           kubeconfigId: 'kubeconfig',
+           configs: 'train-manifest.yml',
+           enableConfigSubstitution: true
+        )
       }
     }
   }
