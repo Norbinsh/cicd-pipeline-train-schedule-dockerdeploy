@@ -43,20 +43,17 @@ pipeline {
 
       }
     }
-
-def remote = [:]
-remote.name = "production"
-remote.host = env.productionServerIP
-remote.allowAnyHosts = true
-remote.user = 'root'
-remote.password = 'password'
-
-node {
-    withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins']) {
-        stage("test remote command") {
-            sshCommand remote: remote, command: 'pwd'
+      stage('Deploy To Production') {
+        steps {
+          input 'are you sure?'
+          milestone(1)
+          withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+            script {
+              sh 'pwd'
+            }
+          }
         }
-    }
+      }
 }
 Classic 
   }
