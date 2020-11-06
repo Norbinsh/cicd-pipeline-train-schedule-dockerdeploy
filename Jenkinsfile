@@ -6,6 +6,12 @@ pipeline {
   }
   agent any
   stages {
+    stage('Build') {
+      steps {
+        echo 'Running build automation'
+        sh './gradlew build --no-daemon'
+        archiveArtifacts artifacts: 'dist/trainSchedule.zip'
+     }
     stage('Cloning Git') {
       steps {
         git([url: 'https://github.com/Norbinsh/cicd-pipeline-train-schedule-dockerdeploy.git', branch: 'master'])
