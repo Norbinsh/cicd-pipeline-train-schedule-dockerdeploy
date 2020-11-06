@@ -50,7 +50,7 @@ pipeline {
         milestone(1)
          kubernetesDeploy(
            kubeconfigId: 'kubeconfig',
-           configs: 'train-manifest.yml',
+           configs: 'train-manifest.yaml',
            enableConfigSubstitution: true
         )
       }
