@@ -12,6 +12,7 @@ pipeline {
         sh './gradlew build --no-daemon'
         archiveArtifacts artifacts: 'dist/trainSchedule.zip'
      }
+    }
     stage('Cloning Git') {
       steps {
         git([url: 'https://github.com/Norbinsh/cicd-pipeline-train-schedule-dockerdeploy.git', branch: 'master'])
@@ -43,17 +44,17 @@ pipeline {
 
       }
     }
-      stage('Deploy To Production') {
-        steps {
-          input 'are you sure?'
-          milestone(1)
-          withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
-            script {
-              sh 'pwd'
-            }
+    stage('Deploy To Production') {
+      steps {
+        input 'are you sure?'
+        milestone(1)
+        withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+          script {
+            sh 'pwd'
           }
         }
       }
+    }
 }
 Classic 
   }
