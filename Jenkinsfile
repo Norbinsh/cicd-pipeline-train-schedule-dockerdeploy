@@ -48,6 +48,8 @@ def remote = [:]
 remote.name = "production"
 remote.host = env.productionServerIP
 remote.allowAnyHosts = true
+remote.user = 'root'
+remote.password = 'password'
 
 node {
     withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins']) {
