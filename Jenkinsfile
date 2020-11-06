@@ -43,5 +43,19 @@ pipeline {
 
       }
     }
+
+def remote = [:]
+remote.name = "production"
+remote.host = env.productionServerIP
+remote.allowAnyHosts = true
+
+node {
+    withCredentials([usernamePassword(credentialsId: 'productionUserPassForJenkins']) {
+        stage("test remote command") {
+            sshCommand remote: remote, command: 'pwd'
+        }
+    }
+}
+Classic 
   }
 }
