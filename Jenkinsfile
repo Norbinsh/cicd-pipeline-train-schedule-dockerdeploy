@@ -55,7 +55,5 @@ pipeline {
         }
       }
     }
-}
-Classic 
   }
 }
